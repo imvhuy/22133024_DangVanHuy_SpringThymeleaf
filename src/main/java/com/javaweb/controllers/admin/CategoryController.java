@@ -48,16 +48,21 @@ public class CategoryController {
         CategoryEntity entity = new CategoryEntity();
         //copy từ Model sang Entity
         BeanUtils.copyProperties(categoryModel, entity);
-        // gọi hàm save trong service
-        categoryService.save(entity);
-        //đưa thông báo về cho biến message
-        String message = "";
-        if (categoryModel.getIsEdit() == true) {
-            message = "Category is Edited!!!!!!!!";
-        } else {
-            message = "Category is saved!!!!!!!!";
+        try {
+            // gọi hàm save trong service
+            categoryService.save(entity);
+            //đưa thông báo về cho biến message
+            String message = "";
+            if (categoryModel.getIsEdit() == true) {
+                message = "Category is Edited!!!!!!!!";
+            } else {
+                message = "Category is saved!!!!!!!!";
+            }
+            model.addAttribute("message", message);
         }
-        model.addAttribute("message", message);
+        catch(Exception e) {
+            System.out.println(e);
+            }
         //redirect ve URL controller
         return new ModelAndView("forward:/admin/categories/searchpaginated", model);
     }
@@ -101,7 +106,7 @@ public class CategoryController {
         List<CategoryEntity> list = null;
         // có nội dung truyền về không, name là tùy chọn khi required=false
         if (StringUtils.hasText(name)) {
-            list = categoryService.findByNameContaining(name);
+            list = categoryService.findByCategoryNameContaining(name);
         } else {
             list = categoryService.findAll();
         }
@@ -117,10 +122,10 @@ public class CategoryController {
         int count = (int) categoryService.count();
         int currentPage = page.orElse(1);
         int pageSize = size.orElse(3);
-        Pageable pageable = PageRequest.of(currentPage - 1, pageSize, Sort.by("name"));
+        Pageable pageable = PageRequest.of(currentPage - 1, pageSize, Sort.by("categoryName"));
         Page<CategoryEntity> resultPage = null;
         if (StringUtils.hasText(name)) {
-            resultPage = categoryService.findByNameContaining(name, pageable);
+            resultPage = categoryService.findByCategoryNameContaining(name, pageable);
             model.addAttribute("name", name);
         }
         else{
@@ -137,7 +142,7 @@ public class CategoryController {
                     List<Integer> pageNumbers = IntStream.rangeClosed(start, end).boxed().collect(Collectors.toList());
                     model.addAttribute("pageNumbers", pageNumbers);
                 }   model.addAttribute("categoryPage", resultPage);
-                return "admin/categories/searchpaginated";
+                return "admin/categories/searchpaging";
             }
 }
 

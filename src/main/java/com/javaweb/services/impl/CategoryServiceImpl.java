@@ -65,12 +65,12 @@ public class CategoryServiceImpl implements CategoryService{
 	}
 
 	@Override
-	public List<CategoryEntity> findByNameContaining(String categoryName) {
-		return categoryRepository.findByCategoryNameContaining(categoryName);
+	public List<CategoryEntity> findByCategoryNameContaining(String name) {
+		return categoryRepository.findByCategoryNameContaining(name);
 	}
 
 	@Override
-	public Page<CategoryEntity> findByNameContaining(String name, Pageable pageable) {
+	public Page<CategoryEntity> findByCategoryNameContaining(String name, Pageable pageable) {
 		return categoryRepository.findByCategoryNameContaining(name, pageable);
 	}
 

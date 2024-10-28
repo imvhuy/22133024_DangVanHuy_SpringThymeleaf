@@ -30,6 +30,5 @@ public class CategoryEntity implements Serializable {
 	@Column(name = "categoryname", columnDefinition = "nvarchar(50) not null")
 	@NotEmpty(message = "Không được phép rỗng")
 	private String categoryName;
-	private int status;
 	
 }

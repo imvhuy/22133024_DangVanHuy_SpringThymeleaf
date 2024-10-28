@@ -17,7 +17,7 @@ public interface CategoryRepository extends JpaRepository<CategoryEntity, Intege
 	//tim kiem noi dung theo ten
 	// Đổi tên phương thức nếu thuộc tính thực sự là 'categoryName'
 	List<CategoryEntity> findByCategoryNameContaining(String categoryName);
-	Page<CategoryEntity> findByCategoryNameContaining(String name, Pageable pageable);
+	Page<CategoryEntity> findByCategoryNameContaining(String categoryName, Pageable pageable);
 
 	Page<CategoryEntity> findAll(Pageable pageable);
 	List<CategoryEntity> findAll(Sort sort);

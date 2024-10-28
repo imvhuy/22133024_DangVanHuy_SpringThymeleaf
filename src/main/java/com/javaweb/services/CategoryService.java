@@ -21,9 +21,9 @@ public interface CategoryService {
 
 	Optional<CategoryEntity> findById(Integer id);
 
-	List<CategoryEntity> findByNameContaining(String name);
+	List<CategoryEntity> findByCategoryNameContaining(String name);
 	//tim kiem va phan trang
-	Page<CategoryEntity> findByNameContaining(String name, Pageable pageable);
+	Page<CategoryEntity> findByCategoryNameContaining(String name, Pageable pageable);
 
 	Page<CategoryEntity> findAll(Pageable pageable);
 

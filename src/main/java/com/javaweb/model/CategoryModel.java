@@ -14,7 +14,8 @@ public class CategoryModel implements Serializable {
 
     private Integer categoryId;
     private String categoryName;
-    private Integer status;
-    private Boolean isEdit;
+    private Boolean isEdit = false;
+
+
 
 }
